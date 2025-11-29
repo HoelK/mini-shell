@@ -19,7 +19,7 @@ char	**ft_double_realloc(char **old, size_t old_ptr_n, size_t new_ptr_n)
 	new = malloc(sizeof(char *) * (new_ptr_n + 1));
 	if (!new)
 		return (free_double(old), NULL);
-	while (i < old_ptr_n)
+	while (i < new_ptr_n && i < old_ptr_n)
 	{
 		new[i] = old[i];
 		i++;
