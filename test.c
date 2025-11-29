@@ -8,7 +8,7 @@ int	main(int ac, char **av)
 	pwd();
 	init_env();
 	char *var = ft_strdup(av[1]);
-	add_env_var(var);
+	export(var);
 	env();
 	free_env();
 }

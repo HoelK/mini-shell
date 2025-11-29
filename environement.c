@@ -61,7 +61,7 @@ int	get_env_var_id(char *var)
 	if (!environ)
 		return (ENV_UNFOUND);
 	i = 0;
-	while (environ[i] && !ft_strnstr(var, environ[i], ft_strlen(var)))
+	while (environ[i] && !ft_strnstr(environ[i], var, (ft_strlen(var) + 1)))
 		i++;
 	if (!environ[i])
 		return (-1);
@@ -82,17 +82,23 @@ void	free_env(void)
 }
 
 //for both function we assume var is malloced
+//we assume var is formated with the %s=%s format
 int	mod_env_var(char *var)
 {
 	int			id;
+	char		**vars;
 	extern char **environ;
 
-	id = get_env_var_id(var);
+	vars = ft_split(var, '=');
+	if (!vars)
+		return (HEAP_ERROR);
+	id = get_env_var_id(vars[0]);
 	if (id < 0)
 		return (id);
 	if (environ[id])
 		free(environ[id]);
 	environ[id] = var;
+	free_double(vars);
 	return (EXIT_SUCCESS);
 }
 

@@ -2,20 +2,17 @@
 
 int	export(char *var)
 {
-	(void) var;
-	/*char	*n_var;
-	int		presence;
+	int		id;
+	char	**vars;
 
-	if (!check_format(var))
+	vars = ft_split(var, '=');
+	id = get_env_var_id(vars[0]);
+	if (id == ENV_UNFOUND)
 		return (EXIT_FAILURE);
-	presence = search_env(var);
-	if (presence < 0)
-		return (HEAP_ERROR);
-	n_var = ft_strdup(var);
-	if (!n_var)
-		return (HEAP_ERROR);
-	if (!presence)
-		return (extend_env(n_var));
-	return (replace_env(n_var, presence));*/
-	return (1);
+	if (id == -1)
+		add_env_var(var);
+	else
+		mod_env_var(var);
+	free_double(vars);
+	return (EXIT_SUCCESS);
 }
