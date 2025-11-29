@@ -11,11 +11,10 @@ int	pwd(void)
 		return (1);
 	while (!getcwd(path, size))
 	{
-		size++;
-		free(path);
-		path = malloc(sizeof(char) * size);
+		path = ft_realloc(path, size, size + 1);
 		if (!path)
-			return (1);
+			return (HEAP_ERROR);
+		size++;
 	}
 	write(1, path, ft_strlen(path));
 	write(1, "\n", 1);
