@@ -32,10 +32,14 @@ char	**ft_double_realloc(char **old, size_t old_ptr_n, size_t new_ptr_n)
 
 void	*ft_realloc(void *old, size_t old_size, size_t new_size)
 {
-	unsigned char *new;
+	size_t			smallest;
+	unsigned char	*new;
 
-	new = malloc(sizeof(char) * new_size);
+	smallest = old_size;
+	if (new_size < old_size)
+		smallest = new_size;
+	new = malloc(sizeof(char) * (new_size + 1));
 	if (!new)
 		return (free(old), NULL);
-	return (ft_memcpy(new, old, old_size), free(old), new);
+	return (ft_memcpy(new, old, smallest), free(old), new);
 }
