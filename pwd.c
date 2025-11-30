@@ -16,8 +16,7 @@ int	pwd(void)
 			return (HEAP_ERROR);
 		(size *= 2);
 	}
-	write(1, path, ft_strlen(path));
-	write(1, "\n", 1);
+	ft_write(path);
 	free(path);
 	return (0);
 }
