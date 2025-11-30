@@ -4,21 +4,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-# ifndef EXIT_SUCCCES
-#  define EXIT_SUCCCES 1
-# endif
-# ifndef EXIT_FAILURE
-#  define EXIT_FAILURE 0
-# endif
-# ifndef HEAP_ERROR
-#  define HEAP_ERROR -1
-# endif
-# ifndef ENV_UNFOUND
-#  define ENV_UNFOUND -2
-# endif
+
+enum cmd_status
+{
+	VAR_UNFOUND = -3,
+	ENV_UNFOUND = -2,
+	HEAP_ERROR = -1,
+	FUNC_FAIL,
+	FUNC_SUCCESS
+};
 
 //helper
 void	ft_write(char *s);
+int		ft_isalnum(int c);
+int		ft_isalpha(int c);
 void	free_double(char **strs);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);

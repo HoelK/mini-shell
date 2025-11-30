@@ -1,24 +1,26 @@
 #include "builtin_cmds.h"
 
-int	unset(char *var)
+static int	check_arg(char *var)
 {
-	int			id;
-	char		**vars;
-	extern char **environ;
+	char	**vars;
 
+	if (!var || !*var || !ft_is_env_standard(var))
+		return (FUNC_FAIL);
 	vars = ft_split(var, '=');
 	if (!vars)
 		return (HEAP_ERROR);
-	id = get_env_var_id(vars[0]);
-	free_double(vars);
-	if (id == -2)
-		return (HEAP_ERROR);
-	if (id == -1)
-		return (EXIT_FAILURE);
+	if (get_env_var_id(vars[0]) == VAR_UNFOUND);
+		return (free_double(vars), FUNC_FAIL);
+	return (free_double(vars), FUNC_SUCCESS);
+}
 
-	int	i;
-	int	j;
-	int	size;
+int	delete_var(int id, char *var)
+{
+	int			i;
+	int			j;
+	int			size;
+	char		**vars;
+	extern char **environ;
 
 	j = 0;
 	i = 0;
@@ -30,13 +32,34 @@ int	unset(char *var)
 	{
 		if (i == id)
 			j++;
-		vars[i] = environ[j];
-		i++;
-		j++;
+		vars[i++] = environ[j++];
 	}
 	vars[i] = NULL;
 	free(environ[id]);
 	free(environ);
 	environ = vars;
-	return (EXIT_SUCCESS);
+	return (FUNC_SUCCESS);
+}
+
+int	unset(char ac, char **av)
+{
+	int			i;
+	int			error;
+	int			exit_status;
+
+	i = -1;
+	exit_status = 0;
+	while (av[++i])
+	{
+		error = check_arg(av[i])
+		if (!error)
+			error = delete_var(id, av[i]);
+		if (error)
+		{
+			ft_write("error");
+			exit_status = 1;
+		}
+		i++;
+	}
+	return (exit_status);
 }

@@ -42,6 +42,18 @@ int	get_env_size(void)
 	return (i);
 }
 
+bool		ft_is_env_standard(char *var)
+{
+	if (!ft_isalpha(*var) && *var != '_')
+		return (false);
+	var++;
+	while (*var && *var != '=' && (ft_isalnum(*var) || *var == '_'))
+		var++;
+	if (*var && *var != '=')
+		return (false);
+	return (true);
+}
+
 char *get_env_var(char *var)
 {
 	int			id;
@@ -53,6 +65,7 @@ char *get_env_var(char *var)
 	return (environ[id]);
 }
 
+//[a-zA-Z_]+[a-zA-Z0-9_]*
 int	get_env_var_id(char *var)
 {
 	size_t		i;
@@ -64,7 +77,7 @@ int	get_env_var_id(char *var)
 	while (environ[i] && !ft_strnstr(environ[i], var, (ft_strlen(var) + 1)))
 		i++;
 	if (!environ[i])
-		return (-1);
+		return (VAR_UNFOUND);
 	return (i);
 }
 
