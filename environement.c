@@ -42,14 +42,14 @@ int	get_env_size(void)
 	return (i);
 }
 
-bool		ft_is_env_standard(char *var)
+bool		env_name_standard(char *var)
 {
 	if (!ft_isalpha(*var) && *var != '_')
 		return (false);
 	var++;
-	while (*var && *var != '=' && (ft_isalnum(*var) || *var == '_'))
+	while (*var && (ft_isalnum(*var) || *var == '_'))
 		var++;
-	if (*var && *var != '=')
+	if (*var)
 		return (false);
 	return (true);
 }

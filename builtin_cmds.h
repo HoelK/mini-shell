@@ -5,13 +5,13 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-enum cmd_status
+enum return_status
 {
 	VAR_UNFOUND = -3,
 	ENV_UNFOUND = -2,
 	HEAP_ERROR = -1,
-	FUNC_FAIL,
-	FUNC_SUCCESS
+	FUNC_SUCCESS,
+	FUNC_FAIL
 };
 
 //helper
@@ -31,7 +31,7 @@ char	**ft_double_realloc(char **old, size_t old_ptr_n, size_t new_ptr_n);
 //cmds
 int		pwd(void);
 int		env(void);
-int		unset(char *var);
+int		unset(char **av);
 int		export(char *new_arg);
 
 //envi
@@ -42,5 +42,6 @@ char		*get_env_var(char *var);
 void		free_env(void);
 int			mod_env_var(char *var);
 int			add_env_var(char *var);
+bool		env_name_standard(char *var);
 
 #endif

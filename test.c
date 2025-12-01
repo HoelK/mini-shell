@@ -7,10 +7,10 @@ int	main(int ac, char **av)
 	(void) av;
 
 	init_env();
-	char *var = ft_strdup(av[1]);
-	if (unset(var) == EXIT_FAILURE)
-		return (free(var), EXIT_FAILURE);
-	env();
-	free(var);
+	//char *var = ft_strdup(av[1]);
+	if (unset(av) == EXIT_FAILURE)
+		return (/*free(var), */EXIT_FAILURE);
+	//env();
+	//free(var);
 	free_env();
 }

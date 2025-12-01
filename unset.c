@@ -2,19 +2,14 @@
 
 static int	check_arg(char *var)
 {
-	char	**vars;
-
-	if (!var || !*var || !ft_is_env_standard(var))
+	if (!var || !*var || !env_name_standard(var))
 		return (FUNC_FAIL);
-	vars = ft_split(var, '=');
-	if (!vars)
-		return (HEAP_ERROR);
-	if (get_env_var_id(vars[0]) == VAR_UNFOUND);
-		return (free_double(vars), FUNC_FAIL);
-	return (free_double(vars), FUNC_SUCCESS);
+	if (get_env_var_id(var) == VAR_UNFOUND)
+		return (FUNC_FAIL);
+	return (FUNC_SUCCESS);
 }
 
-int	delete_var(int id, char *var)
+int	delete_var(char *var)
 {
 	int			i;
 	int			j;
@@ -30,36 +25,29 @@ int	delete_var(int id, char *var)
 		return (HEAP_ERROR);
 	while (i < size)
 	{
-		if (i == id)
+		if (i == get_env_var_id(var))
 			j++;
 		vars[i++] = environ[j++];
 	}
 	vars[i] = NULL;
-	free(environ[id]);
+	free(environ[get_env_var_id(var)]);
 	free(environ);
 	environ = vars;
 	return (FUNC_SUCCESS);
 }
 
-int	unset(char ac, char **av)
+int	unset(char **av)
 {
 	int			i;
 	int			error;
-	int			exit_status;
 
-	i = -1;
-	exit_status = 0;
-	while (av[++i])
+	i = 1;
+	while (av[i])
 	{
-		error = check_arg(av[i])
+		error = check_arg(av[i]);
 		if (!error)
-			error = delete_var(id, av[i]);
-		if (error)
-		{
-			ft_write("error");
-			exit_status = 1;
-		}
+			delete_var(av[i]);
 		i++;
 	}
-	return (exit_status);
+	return (EXIT_SUCCESS);
 }
