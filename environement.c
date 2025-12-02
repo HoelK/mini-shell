@@ -42,6 +42,7 @@ int	get_env_size(void)
 	return (i);
 }
 
+//[a-zA-Z_]+[a-zA-Z0-9_]*
 bool		env_name_standard(char *var)
 {
 	if (!ft_isalpha(*var) && *var != '_')
@@ -65,7 +66,6 @@ char *get_env_var(char *var)
 	return (environ[id]);
 }
 
-//[a-zA-Z_]+[a-zA-Z0-9_]*
 int	get_env_var_id(char *var)
 {
 	size_t		i;

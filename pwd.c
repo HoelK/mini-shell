@@ -14,7 +14,7 @@ int	pwd(void)
 		path = ft_realloc(path, size, (size * 2));
 		if (!path)
 			return (HEAP_ERROR);
-		(size *= 2);
+		size *= 2;
 	}
 	ft_write(path);
 	free(path);

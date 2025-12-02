@@ -32,7 +32,7 @@ char	**ft_double_realloc(char **old, size_t old_ptr_n, size_t new_ptr_n);
 int		pwd(void);
 int		env(void);
 int		unset(char **av);
-int		export(char *new_arg);
+int		export(char **av);
 
 //envi
 int			init_env(void);
