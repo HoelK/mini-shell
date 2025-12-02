@@ -6,11 +6,11 @@
 /*   By: hkeromne <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 21:09:24 by hkeromne          #+#    #+#             */
-/*   Updated: 2025/10/27 21:09:24 by hkeromne         ###   ########.fr       */
+/*   Updated: 2025/12/02 05:12:48 by hkeromne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "builtin_cmds.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {

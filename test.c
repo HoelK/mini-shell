@@ -7,7 +7,6 @@ int	main(int ac, char **av)
 	(void) av;
 
 	init_env();
-	export(av);
-	env();
+	echo(av);
 	free_env();
 }
