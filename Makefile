@@ -1,21 +1,38 @@
 CC=cc
 FLAGS=-Wall -Werror -Wextra -g
-SRCS=ft_write.c ft_realloc.c ft_strdup.c ft_split.c ft_strnstr.c ft_strlen.c ft_memcpy.c ft_strchr.c export.c pwd.c env.c test.c environement.c unset.c ft_isalnum.c ft_isalpha.c echo.c ft_strncmp.c cd.c ft_strjoin.c
+LIBFT_DIR=libft/
+LIBFT=libft.a
+SRC_DIR=srcs/
+SRCS=$(SRC_DIR)/ft_write.c \
+	 $(SRC_DIR)/ft_realloc.c \
+	 $(SRC_DIR)/export.c \
+	 $(SRC_DIR)/pwd.c \
+	 $(SRC_DIR)/env.c \
+	 $(SRC_DIR)/test.c \
+	 $(SRC_DIR)/environement.c \
+	 $(SRC_DIR)/unset.c \
+	 $(SRC_DIR)/echo.c \
+	 $(SRC_DIR)/cd.c
 OBJS=$(SRCS:.c=.o)
 NAME=mini-shell
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(FLAGS) $(OBJS) -o $(NAME) -lft -L$(LIBFT_DIR)
+
+$(LIBFT): $(LIBFT_DIR)
+	make -C $(LIBFT_DIR)
 
 %.o: %.c
 	$(CC) $(FLAGS) -c $^ -o $@
 
 clean:
+	make clean -C $(LIBFT_DIR)
 	rm -f $(OBJS)
 
 fclean: clean
+	make fclean -C $(LIBFT_DIR)
 	rm -f $(NAME)
 
 re: fclean all

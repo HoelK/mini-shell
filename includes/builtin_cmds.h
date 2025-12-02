@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "../libft/libft.h"
 
 enum return_status
 {
@@ -16,18 +17,9 @@ enum return_status
 
 //helper
 void	ft_write(char *s);
-int		ft_isalnum(int c);
-int		ft_isalpha(int c);
 void	free_double(char **strs);
-size_t	ft_strlen(const char *s);
-char	*ft_strdup(const char *s);
 char	*ft_strchr(const char *s, int c);
-char	**ft_split(const char *str, char c);
-char	*ft_strjoin(char const *s1, char const *s2);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	*ft_realloc(void *old, size_t old_size, size_t new_size);
-char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	**ft_double_realloc(char **old, size_t old_ptr_n, size_t new_ptr_n);
 
 //cmds
