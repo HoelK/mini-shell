@@ -7,6 +7,7 @@ int	main(int ac, char **av)
 	(void) av;
 
 	init_env();
-	echo(av);
+	cd(ac, av);
+	write(1, environ[get_env_var_id("PWD")], ft_strlen(environ[get_env_var_id("PWD")]));
 	free_env();
 }

@@ -23,6 +23,7 @@ size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
 char	*ft_strchr(const char *s, int c);
 char	**ft_split(const char *str, char c);
+char	*ft_strjoin(char const *s1, char const *s2);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	*ft_realloc(void *old, size_t old_size, size_t new_size);
@@ -35,6 +36,7 @@ int		env(void);
 int		unset(char **av);
 int		export(char **av);
 void	echo(char **av);
+int		cd(int ac, char **av);
 
 //envi
 int			init_env(void);
