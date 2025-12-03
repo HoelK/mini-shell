@@ -3,16 +3,17 @@ FLAGS=-Wall -Werror -Wextra -g
 LIBFT_DIR=libft/
 LIBFT=libft.a
 SRC_DIR=srcs/
-SRCS=$(SRC_DIR)/ft_write.c \
-	 $(SRC_DIR)/ft_realloc.c \
-	 $(SRC_DIR)/export.c \
+SRCS=$(SRC_DIR)/export.c \
 	 $(SRC_DIR)/pwd.c \
 	 $(SRC_DIR)/env.c \
-	 $(SRC_DIR)/test.c \
-	 $(SRC_DIR)/environement.c \
 	 $(SRC_DIR)/unset.c \
 	 $(SRC_DIR)/echo.c \
-	 $(SRC_DIR)/cd.c
+	 $(SRC_DIR)/cd.c \
+	 $(SRC_DIR)/exit.c \
+	 $(SRC_DIR)/environement.c \
+	 $(SRC_DIR)/shell.c \
+	 $(SRC_DIR)/test.c \
+	 $(SRC_DIR)/utils.c
 OBJS=$(SRCS:.c=.o)
 NAME=mini-shell
 

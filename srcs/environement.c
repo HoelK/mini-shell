@@ -1,11 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   environement.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hkeromne <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/02 20:34:53 by hkeromne          #+#    #+#             */
+/*   Updated: 2025/12/03 03:20:15 by hkeromne         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/builtin_cmds.h"
+
+void	ft_double_write(char **strs);
+size_t	ft_doublelen(char **strs);
+int		get_row_id(char **strs, char *content);
+char	**replace_row(size_t id, char *new_row, char **strs);
+char	**add_row(char *new_row, char **strs);
+char	**delete_row(size_t id, char **strs);
+char	**ft_doubledup(char **srcs);
+int		ft_strcmp(char *s1, char *s2);
 
 int	init_env(void)
 {
 	int			i;
 	int			size;
 	char		**tmp;
-	extern char **environ;
+	extern char	**environ;
 
 	size = get_env_size();
 	if (size < 0)
@@ -32,7 +53,7 @@ int	init_env(void)
 int	get_env_size(void)
 {
 	size_t		i;
-	extern char **environ;
+	extern char	**environ;
 
 	if (!environ)
 		return (ENV_UNFOUND);
@@ -43,7 +64,7 @@ int	get_env_size(void)
 }
 
 //[a-zA-Z_]+[a-zA-Z0-9_]*
-bool		env_name_standard(char *var)
+bool	env_name_standard(char *var)
 {
 	if (!ft_isalpha(*var) && *var != '_')
 		return (false);
@@ -55,10 +76,10 @@ bool		env_name_standard(char *var)
 	return (true);
 }
 
-char *get_env_var(char *var)
+char	*get_env_var(char *var)
 {
 	int			id;
-	extern char **environ;
+	extern char	**environ;
 
 	id = get_env_var_id(var);
 	if (id < 0)
@@ -69,7 +90,7 @@ char *get_env_var(char *var)
 int	get_env_var_id(char *var)
 {
 	size_t		i;
-	extern char **environ;
+	extern char	**environ;
 
 	if (!environ)
 		return (ENV_UNFOUND);
@@ -84,7 +105,7 @@ int	get_env_var_id(char *var)
 void	free_env(void)
 {
 	size_t		i;
-	extern char **environ;
+	extern char	**environ;
 
 	if (!environ)
 		return ;
@@ -100,7 +121,7 @@ int	mod_env_var(char *var)
 {
 	int			id;
 	char		**vars;
-	extern char **environ;
+	extern char	**environ;
 
 	vars = ft_split(var, '=');
 	if (!vars)
@@ -111,15 +132,15 @@ int	mod_env_var(char *var)
 	if (environ[id])
 		free(environ[id]);
 	environ[id] = var;
-	free_double(vars);
+	ft_double_free(vars);
 	return (EXIT_SUCCESS);
 }
 
-int add_env_var(char *var)
+int	add_env_var(char *var)
 {
 	int			size;
 	char		**new_env;
-	extern char **environ;
+	extern char	**environ;
 
 	size = get_env_size();
 	if (size < 0)

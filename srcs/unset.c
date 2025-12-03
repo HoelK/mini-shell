@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hkeromne <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/02 20:35:54 by hkeromne          #+#    #+#             */
+/*   Updated: 2025/12/02 20:41:08 by hkeromne         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/builtin_cmds.h"
 
 static int	check_arg(char *var)
@@ -15,7 +27,7 @@ int	delete_var(char *var)
 	int			j;
 	int			size;
 	char		**vars;
-	extern char **environ;
+	extern char	**environ;
 
 	j = 0;
 	i = 0;

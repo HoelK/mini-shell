@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkeromne <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/02 20:35:47 by hkeromne          #+#    #+#             */
-/*   Updated: 2025/12/03 03:23:01 by hkeromne         ###   ########.fr       */
+/*   Created: 2025/12/03 01:20:15 by hkeromne          #+#    #+#             */
+/*   Updated: 2025/12/03 03:20:37 by hkeromne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/builtin_cmds.h"
 
-int	main(int ac, char **av, char **env)
+int	exit_shell(t_shell *shell, uint8_t return_status)
 {
-	(void) ac;
-	(void) av;
-	(void) env;
-	/*t_shell		shell;
+	ft_double_free(shell->env);
+	exit (return_status);
+}
 
-	init_shell(&shell);
-	exit_shell(&shell, 0);*/
+void	init_shell(t_shell *shell)
+{
+	extern char	**environ;
 
-	char **s;
-	s = ft_doubledup(env);
-	s = ft_add_row(ft_strdup(av[1]), s);
-	s = ft_replace_row(ft_get_row_id("test=", s), ft_strdup("test=rien"), s);
-	s = ft_delete_row(ft_doublelen(s) - 1, s);
-	ft_double_write(s);
-	ft_double_free(s);
+	init_env();
+	shell->last_exit = 0;
+	shell->env = environ;
 }

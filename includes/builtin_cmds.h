@@ -1,12 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_cmds.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hkeromne <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/02 20:38:29 by hkeromne          #+#    #+#             */
+/*   Updated: 2025/12/03 03:18:16 by hkeromne         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef BUILTIN_CMDS_H
 # define BUILTIN_CMDS_H
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include "../libft/libft.h"
+# include <unistd.h>
+# include <stdio.h>
+# include <stdint.h>
+# include <stdlib.h>
+# include <stdbool.h>
+# include "../libft/libft.h"
+# ifndef SHELL
+#  define SHELL "mini-shell"
+# endif
 
-enum return_status
+enum e_return_status
 {
 	VAR_UNFOUND = -3,
 	ENV_UNFOUND = -2,
@@ -15,10 +31,24 @@ enum return_status
 	FUNC_FAIL
 };
 
+enum e_error_status
+{
+	TOO_MANY_ARGS,
+	MISSING_ARGS,
+	NUMERIC_REQUIRED
+};
+
+typedef struct s_shell
+{
+	char	**env;
+	int		last_exit;
+}	t_shell;
+
 //helper
 void	ft_write(char *s);
 void	free_double(char **strs);
 char	*ft_strchr(const char *s, int c);
+void	ft_write_error(char *func, int error);
 void	*ft_realloc(void *old, size_t old_size, size_t new_size);
 char	**ft_double_realloc(char **old, size_t old_ptr_n, size_t new_ptr_n);
 
@@ -29,15 +59,20 @@ int		unset(char **av);
 int		export(char **av);
 void	echo(char **av);
 int		cd(int ac, char **av);
+int		ft_exit(int ac, char **av, t_shell *shell);
+
+//shell
+void	init_shell(t_shell *shell);
+int		exit_shell(t_shell *shell, uint8_t return_status);
 
 //envi
-int			init_env(void);
-int			get_env_size(void);
-int			get_env_var_id(char *var);
-char		*get_env_var(char *var);
-void		free_env(void);
-int			mod_env_var(char *var);
-int			add_env_var(char *var);
-bool		env_name_standard(char *var);
+int		init_env(void);
+int		get_env_size(void);
+int		get_env_var_id(char *var);
+char	*get_env_var(char *var);
+void	free_env(void);
+int		mod_env_var(char *var);
+int		add_env_var(char *var);
+bool	env_name_standard(char *var);
 
 #endif

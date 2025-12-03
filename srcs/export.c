@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hkeromne <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/02 20:36:01 by hkeromne          #+#    #+#             */
+/*   Updated: 2025/12/03 03:19:30 by hkeromne         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/builtin_cmds.h"
 
 char	**sort_ascii(char **strs)
@@ -33,12 +45,12 @@ void	ft_doublewrite(char **strs)
 	}
 }
 
-void empty_handle(void)
+void	empty_handle(void)
 {
 	int			i;
 	int			size;
 	char		**tmp;
-	extern char **environ;
+	extern char	**environ;
 
 	i = -1;
 	size = get_env_size();
@@ -90,7 +102,7 @@ int	export(char **av)
 			write(1, vars[0], ft_strlen(vars[0]));
 			ft_write("': not a valid identifier");
 		}
-		free_double(vars);
+		ft_double_free(vars);
 		i++;
 	}
 	return (EXIT_SUCCESS);
