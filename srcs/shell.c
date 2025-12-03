@@ -6,7 +6,7 @@
 /*   By: hkeromne <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 01:20:15 by hkeromne          #+#    #+#             */
-/*   Updated: 2025/12/03 03:20:37 by hkeromne         ###   ########.fr       */
+/*   Updated: 2025/12/03 04:06:32 by hkeromne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@ int	exit_shell(t_shell *shell, uint8_t return_status)
 	exit (return_status);
 }
 
-void	init_shell(t_shell *shell)
+void	init_shell(t_shell *shell, char **env)
 {
 	extern char	**environ;
 
-	init_env();
 	shell->last_exit = 0;
-	shell->env = environ;
+	shell->env = ft_doubledup(env);
 }

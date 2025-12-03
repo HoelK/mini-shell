@@ -10,7 +10,6 @@ SRCS=$(SRC_DIR)/export.c \
 	 $(SRC_DIR)/echo.c \
 	 $(SRC_DIR)/cd.c \
 	 $(SRC_DIR)/exit.c \
-	 $(SRC_DIR)/environement.c \
 	 $(SRC_DIR)/shell.c \
 	 $(SRC_DIR)/test.c \
 	 $(SRC_DIR)/utils.c

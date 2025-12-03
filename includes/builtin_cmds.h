@@ -6,7 +6,7 @@
 /*   By: hkeromne <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 20:38:29 by hkeromne          #+#    #+#             */
-/*   Updated: 2025/12/03 03:18:16 by hkeromne         ###   ########.fr       */
+/*   Updated: 2025/12/03 04:06:51 by hkeromne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,25 +54,18 @@ char	**ft_double_realloc(char **old, size_t old_ptr_n, size_t new_ptr_n);
 
 //cmds
 int		pwd(void);
-int		env(void);
-int		unset(char **av);
+int		env(char **env);
+int		unset(char **av, char **env);
 int		export(char **av);
 void	echo(char **av);
-int		cd(int ac, char **av);
+int		cd(int ac, char **av, char **env);
 int		ft_exit(int ac, char **av, t_shell *shell);
 
 //shell
-void	init_shell(t_shell *shell);
+void	init_shell(t_shell *shell, char **env);
 int		exit_shell(t_shell *shell, uint8_t return_status);
 
 //envi
-int		init_env(void);
-int		get_env_size(void);
-int		get_env_var_id(char *var);
-char	*get_env_var(char *var);
-void	free_env(void);
-int		mod_env_var(char *var);
-int		add_env_var(char *var);
 bool	env_name_standard(char *var);
 
 #endif

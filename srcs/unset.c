@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkeromne <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/02 20:35:54 by hkeromne          #+#    #+#             */
-/*   Updated: 2025/12/02 20:41:08 by hkeromne         ###   ########.fr       */
+/*   Created: 2025/12/03 03:49:23 by hkeromne          #+#    #+#             */
+/*   Updated: 2025/12/03 03:58:14 by hkeromne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,49 +16,31 @@ static int	check_arg(char *var)
 {
 	if (!var || !*var || !env_name_standard(var))
 		return (FUNC_FAIL);
-	if (get_env_var_id(var) == VAR_UNFOUND)
-		return (FUNC_FAIL);
 	return (FUNC_SUCCESS);
 }
 
-int	delete_var(char *var)
+int	delete_var(char *var, char **env)
 {
-	int			i;
-	int			j;
-	int			size;
 	char		**vars;
-	extern char	**environ;
 
-	j = 0;
-	i = 0;
-	size = get_env_size();
-	vars = malloc(sizeof(char *) * size);
+	vars = ft_split(var, '=');
 	if (!vars)
 		return (HEAP_ERROR);
-	while (i < size)
-	{
-		if (i == get_env_var_id(var))
-			j++;
-		vars[i++] = environ[j++];
-	}
-	vars[i] = NULL;
-	free(environ[get_env_var_id(var)]);
-	free(environ);
-	environ = vars;
+	if (ft_get_row_id(vars[0], env) >= 0)
+		env = ft_delete_row(ft_get_row_id(vars[0], env), env);
+	ft_double_free(vars);
 	return (FUNC_SUCCESS);
 }
 
-int	unset(char **av)
+int	unset(char **av, char **env)
 {
 	int			i;
-	int			error;
 
 	i = 1;
 	while (av[i])
 	{
-		error = check_arg(av[i]);
-		if (!error)
-			delete_var(av[i]);
+		if (!check_arg(av[i]))
+			delete_var(av[i], env);
 		i++;
 	}
 	return (EXIT_SUCCESS);

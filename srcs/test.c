@@ -6,7 +6,7 @@
 /*   By: hkeromne <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 20:35:47 by hkeromne          #+#    #+#             */
-/*   Updated: 2025/12/03 03:23:01 by hkeromne         ###   ########.fr       */
+/*   Updated: 2025/12/03 04:08:24 by hkeromne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@ int	main(int ac, char **av, char **env)
 	(void) ac;
 	(void) av;
 	(void) env;
-	/*t_shell		shell;
+	t_shell		shell;
 
-	init_shell(&shell);
-	exit_shell(&shell, 0);*/
+	init_shell(&shell, env);
 
 	char **s;
 	s = ft_doubledup(env);
@@ -29,4 +28,5 @@ int	main(int ac, char **av, char **env)
 	s = ft_delete_row(ft_doublelen(s) - 1, s);
 	ft_double_write(s);
 	ft_double_free(s);
+	exit_shell(&shell, 0);
 }

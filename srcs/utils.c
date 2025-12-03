@@ -6,7 +6,7 @@
 /*   By: hkeromne <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 01:03:15 by hkeromne          #+#    #+#             */
-/*   Updated: 2025/12/03 03:14:42 by hkeromne         ###   ########.fr       */
+/*   Updated: 2025/12/03 04:08:06 by hkeromne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,3 +26,15 @@ void	ft_write_error(char *func, int error)
 		ft_write("numeric argument required");
 }
 
+//[a-zA-Z_]+[a-zA-Z0-9_]*
+bool	env_name_standard(char *var)
+{
+	if (!ft_isalpha(*var) && *var != '_')
+		return (false);
+	var++;
+	while (*var && (ft_isalnum(*var) || *var == '_'))
+		var++;
+	if (*var)
+		return (false);
+	return (true);
+}

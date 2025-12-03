@@ -6,13 +6,13 @@
 /*   By: hkeromne <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 20:36:01 by hkeromne          #+#    #+#             */
-/*   Updated: 2025/12/03 03:19:30 by hkeromne         ###   ########.fr       */
+/*   Updated: 2025/12/03 03:57:44 by hkeromne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/builtin_cmds.h"
 
-char	**sort_ascii(char **strs)
+/*char	**sort_ascii(char **strs)
 {
 	int		i;
 	int		j;
@@ -72,11 +72,12 @@ bool	equal_presence(char *s)
 		s++;
 	}
 	return (false);
-}
+}*/
 
 int	export(char **av)
 {
-	int		i;
+	(void) av;
+	/*int		i;
 	char	**vars;
 
 	i = 1;
@@ -104,6 +105,6 @@ int	export(char **av)
 		}
 		ft_double_free(vars);
 		i++;
-	}
+	}*/
 	return (EXIT_SUCCESS);
 }
