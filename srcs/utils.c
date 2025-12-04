@@ -6,7 +6,7 @@
 /*   By: hkeromne <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 01:03:15 by hkeromne          #+#    #+#             */
-/*   Updated: 2025/12/03 04:08:06 by hkeromne         ###   ########.fr       */
+/*   Updated: 2025/12/04 08:13:03 by hkeromne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,51 @@ bool	env_name_standard(char *var)
 	if (*var)
 		return (false);
 	return (true);
+}
+
+char	*get_env_var_value(char *name, char **env)
+{
+	int		i;
+	int		id;
+	char	*value;
+
+	i = 0;
+	id = ft_get_row_id(name, env);
+	if (id == -1)
+		return (NULL);
+	while (env[id][i] != '=')
+		i++;
+	value = ft_strdup(&env[id][++i]);
+	if (!value)
+		return (NULL);
+	return (value);
+}
+
+bool	var_exist(char *name, char **env)
+{
+	if (ft_get_row_id(name, env) == -1)
+		return (false);
+	return (true);
+}
+
+char	*get_pwd(void)
+{
+	size_t	size;
+	char	*path;
+	char	*res;
+
+	size = 2;
+	path = malloc(sizeof(char) * size);
+	if (!path)
+		return (NULL);
+	while (!getcwd(path, size))
+	{
+		path = ft_realloc(path, size, (size * 2));
+		if (!path)
+			return (NULL);
+		size *= 2;
+	}
+	res = ft_strjoin(path, "/");
+	free(path);
+	return (res);
 }

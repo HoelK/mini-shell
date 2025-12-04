@@ -6,26 +6,71 @@
 /*   By: hkeromne <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 20:35:05 by hkeromne          #+#    #+#             */
-/*   Updated: 2025/12/03 04:05:28 by hkeromne         ###   ########.fr       */
+/*   Updated: 2025/12/04 08:14:53 by hkeromne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/builtin_cmds.h"
 
-int	cd(int ac, char **av, char **env)
+bool try_path(char *av, char *path)
 {
-	char	*var;
-
-	if (ac != 2)
-		return (EXIT_FAILURE);
-	if (access(av[1], F_OK | X_OK))
+	if (access(path, X_OK | F_OK))
 	{
-		perror(NULL);
-		return (EXIT_FAILURE);
+		free(path);
+		write(1, "mini-shell: ", 12);
+		write(1, "cd: ", 4);
+		write(1, av, ft_strlen(av));
+		ft_write(": No such file or directory");
+		return (false);
 	}
-	if (av[1][0] == '/')
-		var = ft_strjoin(env[ft_get_row_id(("PATH="), env)], av[1]);
-	var = ft_strjoin("PWD=", av[1]);
-	env = ft_replace_row(ft_get_row_id("PATH=", env), var, env);
+	return (true);
+}
+
+char	**update_pwd(char *path, char **env)
+{
+	char	*res;
+
+	res = ft_strjoin("PWD=", path);
+	if (!res)
+		return (NULL);
+	return (ft_replace_row(ft_get_row_id("PWD=", env), res, env));
+}
+
+char	*create_path(char *path, char **env)
+{
+	char	*res;
+	char	*pwd;
+	
+	if (!path && !var_exist("HOME=", env))
+	{
+		write(1, "mini-shell: ", 12);
+		write(1, "cd: ", 4);
+		ft_write("HOME not set");
+		return (NULL);
+	}
+	else if (!path)
+		return (get_env_var_value("HOME=", env));
+	else if (path[0] == '/')
+		return (ft_strdup(path));
+	pwd = get_pwd();
+	res = ft_strjoin(pwd, path);
+	return (free(pwd), res);
+}
+
+int	cd(int ac, char **av, t_shell *shell)
+{
+	char	*res;
+
+	if (ac > 2)
+		return (ft_write_error("cd", TOO_MANY_ARGS), EXIT_FAILURE);
+	if (av[1] && !av[1][0])
+		return (EXIT_SUCCESS);
+	res = create_path(av[1], shell->env);
+	if (!res || !try_path(av[1], res))
+		return (EXIT_FAILURE);
+	if (var_exist("PATH=", shell->env))
+		shell->env = update_pwd(res, shell->env);
+	chdir(res);
+	free(res);
 	return (EXIT_SUCCESS);
 }

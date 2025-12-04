@@ -6,7 +6,7 @@
 /*   By: hkeromne <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 20:35:35 by hkeromne          #+#    #+#             */
-/*   Updated: 2025/12/02 20:35:36 by hkeromne         ###   ########.fr       */
+/*   Updated: 2025/12/03 21:06:31 by hkeromne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ int	pwd(void)
 	}
 	ft_write(path);
 	free(path);
-	return (0);
+	return (EXIT_SUCCESS);
 }

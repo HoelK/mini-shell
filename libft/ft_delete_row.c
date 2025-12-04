@@ -6,7 +6,7 @@
 /*   By: hkeromne <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 03:07:40 by hkeromne          #+#    #+#             */
-/*   Updated: 2025/12/03 03:07:44 by hkeromne         ###   ########.fr       */
+/*   Updated: 2025/12/03 19:32:25 by hkeromne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	**ft_delete_row(size_t id, char **strs)
 	res = malloc(sizeof(char *) * size);
 	if (!res)
 		return (NULL);
-	while (j < (size - 1) && strs[j])
+	while (j < size && strs[j])
 	{
 		if (i == (int)id)
 			j++;
